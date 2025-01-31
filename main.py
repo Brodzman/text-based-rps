@@ -9,6 +9,37 @@ def main():
     player, weapon = game_start()
     enemies = level_1()
     init_battlefield(player, enemies)
+    turn_order = determine_turn_order(player, enemies)
+    print(turn_order)
+    selection = enemy_selection(turn_order, player)
+    for character in turn_order:
+        if character != player:
+            character.deal_damage(character.damage, player)
+        elif character == player:
+            character.deal_damage(character.damage, turn_order[selection])
+    for i in turn_order:
+        print(f'after battle health is: {i.health}')
+    
+def enemy_selection(turn_order, player):
+    i = 1
+    for enemy in turn_order:
+        if enemy != player:
+            print(f'{i}. {enemy.name}')
+            i += 1
+    selection = input('Who would you like to attack?')
+    return int(selection)
+
+
+def determine_turn_order(player, enemies):
+    turn_order = []
+    for enemy in enemies:
+        if enemy.speed > player.speed:
+            turn_order.append(enemy)
+        elif enemy.speed < player.speed and player not in turn_order:
+            turn_order.append(player)
+    if player not in turn_order:
+        turn_order.append(player)
+    return turn_order
 
 def init_battlefield(player, enemies):
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -50,6 +81,7 @@ def enemy_spawner():
     slime.name = 'slime'
     slime.damage = 50
     slime.health = 50
+    slime.speed = 1
     return slime
 
 def level_1():
