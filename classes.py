@@ -14,3 +14,10 @@ class Player(Character):
 class Enemy(Character):
     def __init__(self, name, health, damage):
         super().__init__(name, health, damage)
+
+class Weapon:
+    def __init__(self, name, multiplyer, type):
+        self.name = name
+        self.multiplyer = multiplyer
+        self.type = type
+

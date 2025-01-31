@@ -1,15 +1,25 @@
 from classes import *
+import random
 
-def main ():
-    steven = Player
-    steven.name = 'steven'
-    steven.damage = 2
-    steven.health = 10
+def main():
+    player = create_player(input('Enter name: '))
+    enemy = enemy_spawner()
+    print(enemy.damage)
+    print(player.name)
 
+def create_player(name):
+    player = Player
+    player.name = name
+    player.damage = 25
+    player.health = 100
+    return player
+
+def enemy_spawner():
     slime = Enemy
     slime.name = 'slime'
-    slime.damage = 2
-    slime.health = 10
+    slime.damage = random.randint(1, 50)
+    slime.health = random.randint(50,100)
+    return slime
 
 
 
