@@ -55,6 +55,17 @@ class Enemy(Character):
     def __init__(self, name, health, damage, speed):
         super().__init__(name, health, damage, speed)
 
+    def set_stats(self):
+        pass
+
+class Slime(Enemy):
+    def __init__(self, name, health, damage, speed):
+        super().__init__(name, health, damage, speed)
+
+    def set_stats(self, round):
+        self.name = 'Slime'
+        self.health = SLIME_START_HEALTH * (round * 0.5)
+
 class Weapon:
     def __init__(self, name, multiplyer, type):
         self.name = name

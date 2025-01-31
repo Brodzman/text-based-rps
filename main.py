@@ -16,9 +16,9 @@ def main():
         if character != player:
             character.deal_damage(character.damage, player)
         elif character == player:
-            character.deal_damage(character.damage, turn_order[selection])
+            character.deal_damage(character.damage, turn_order[selection - 1])
     for i in turn_order:
-        print(f'after battle health is: {i.health}')
+        print(f'after battle {i} health is: {i.health}')
     
 def enemy_selection(turn_order, player):
     i = 1
@@ -87,7 +87,8 @@ def enemy_spawner():
 def level_1():
     enemy_list = []
     enemy1 = enemy_spawner()
-    enemy2 = enemy_spawner()
+    enemy2 = Slime
+    enemy2.set_stats(enemy2, 1)
     enemy_list.append(enemy1)
     enemy_list.append(enemy2)
     return enemy_list
