@@ -11,7 +11,7 @@ def main():
     init_battlefield(player, enemies)
     turn_order = determine_turn_order(player, enemies)
     print(turn_order)
-    selection = enemy_selection(turn_order, player)
+    selection = enemy_selection(enemies, player)
     for character in turn_order:
         if character != player:
             character.deal_damage(character.damage, player)
@@ -20,12 +20,14 @@ def main():
     for i in turn_order:
         print(f'after battle {i} health is: {i.health}')
     
-def enemy_selection(turn_order, player):
+def enemy_selection(enemies, player):
     i = 1
-    for enemy in turn_order:
+    for enemy in enemies:
         if enemy != player:
             print(f'{i}. {enemy.name}')
             i += 1
+        else:
+            pass
     selection = input('Who would you like to attack?')
     return int(selection)
 
